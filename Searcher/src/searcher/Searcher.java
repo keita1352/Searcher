@@ -10,61 +10,100 @@ class Searcher{
 	public static void main(String []args){
 		System.out.println("Welcome to Searcher-A!");
 		System.out.println("What do you want to search?");
-		switch (new Scanner(System.in).next()){
-			case "english":
-			case "English":
-				switch(new Scanner(System.in).next()){
-					case "こんにちは":
-						System.out.println("Hello");
-						break;
-					case "1つの":
-					case "一つの":
-					case "ひとつの":
-						System.out.println("a");
-						break;
-					case "できる":
-					case "出来る":
-					case "有能な":
-					case "ゆうのうな":
-						System.out.println("able");
-						break;
-					case "午後":
-					case "ごご":
-						System.out.println("afternoon");
-						break;
-					default:
-						System.out.println("Sorry,I don't know.");
-				}
+		boolean out = true;
+		while (out) {
+			switch (new Scanner(System.in).next()){
+				case "programer":
+				case "Programer":
+				case "program":
+				case "Program":
+					switch(new Scanner(System.in).next()){
+						case "java-base":
+						case "Java-base":
+						case "java-Base":
+						case "Java-Base":
+						case "javabase":
+						case "Javabase":
+						case "javaBase":
+						case "JavaBase":
+						case "java":
+						case "Java":
+							base("java","basic");
+							break;
+						case "javafx":
+						case "JavaFx":
+						case "javaFx":
+							base("java","javafx");
+							break;
+						default:
+							System.out.println("Oh! You made mistakes!");
+					}
+					break;
+				case "bot":
+				case "Bot":
+					System.out.println("Welcome to Bot World!\r\nYou can use english.");
+					while(out) {
+						switch (new Scanner(System.in).next()) {
+							case "english":
+							case "English":
+								while(out) {
+									String japanese = new Scanner(System.in).next();
+									if (japanese.equals("exit")||japanese.equals("Exit")) {
+										System.out.println("Searcher//bot//english -> Searcher//bot");
+										out = false;
+									}else {
+										english(japanese);
+									}
+								}
+								out = true;
+								break;
+							case "exit":
+							case "Exit":
+								System.out.println("Searcher//bot -> Searcher");
+								out = false;
+								break;
+							default:
+								System.out.println("Oh! You made mistakes!");
+						}
+					}
+					out = true;
+					break;
+				case "help":
+				case "Help":
+					System.out.println("You are Searcher now.\r\nYou can do these:\r\n    program,bot,help,exit");
+					break;
+				case "exit":
+				case "Exit":
+					System.out.println("Good bye!");
+					out = false;
+					break;
+				default:
+					System.out.println("Oh! You made mistakes!");
+			}
+		}
+	}
+	public static void english(String japanese) {
+		switch(japanese){
+			case "こんにちは":
+				System.out.println("Hello");
 				break;
-			case "programer":
-			case "Programer":
-			case "program":
-			case "Program":
-				switch(new Scanner(System.in).next()){
-					case "java-base":
-					case "Java-base":
-					case "java-Base":
-					case "Java-Base":
-					case "javabase":
-					case "Javabase":
-					case "javaBase":
-					case "JavaBase":
-					case "java":
-					case "Java":
-						base("java","basic");
-						break;
-					case "javafx":
-					case "JavaFx":
-					case "javaFx":
-					case "Javafx":
-						base("java","javafx");
-						break;
-					default:
-						System.out.println("Oh! You made mistakes!");
-				}
+			case "1つの":
+			case "一つの":
+			case "ひとつの":
+				System.out.println("a");
+				break;
+			case "できる":
+			case "出来る":
+			case "有能な":
+			case "ゆうのうな":
+				System.out.println("able");
+				break;
+			case "午後":
+			case "ごご":
+				System.out.println("afternoon");
 				break;
 			default:
-				System.out.println("Oh! You made mistakes!");
+				System.out.println("Sorry,I don't know.");
 		}
 	}
 	@SuppressWarnings("resource")
