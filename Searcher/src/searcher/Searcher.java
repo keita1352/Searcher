@@ -1,8 +1,12 @@
 package searcher;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Searcher{
@@ -52,7 +56,7 @@ class Searcher{
 										System.out.println("Searcher//bot//english -> Searcher//bot");
 										out = false;
 									}else {
-										english(japanese);
+										System.out.println(conversation(japanese,true,"english"));
 									}
 								}
 								out = true;
@@ -80,30 +84,6 @@ class Searcher{
 				default:
 					System.out.println("Oh! You made mistakes!");
 			}
-		}
-	}
-	public static void english(String japanese) {
-		switch(japanese){
-			case "こんにちは":
-				System.out.println("Hello");
-				break;
-			case "1つの":
-			case "一つの":
-			case "ひとつの":
-				System.out.println("a");
-				break;
-			case "できる":
-			case "出来る":
-			case "有能な":
-			case "ゆうのうな":
-				System.out.println("able");
-				break;
-			case "午後":
-			case "ごご":
-				System.out.println("afternoon");
-				break;
-			default:
-				System.out.println("Sorry,I don't know.");
 		}
 	}
 	@SuppressWarnings("resource")
@@ -155,5 +135,60 @@ class Searcher{
 		}else{
 			System.out.println("File wasn't founded...");
 		}
+	}
+	public static String conversation(String language,boolean direction,String type) {
+		String out;
+		switch(type) {
+			case "english":
+			case "English":
+				File english = new File("english.txt");
+				File japanese = new File("japanese.txt");
+				if(english.exists()&&japanese.exists()) {
+					FileReader englishReader = null;
+					FileReader japaneseReader = null;
+					try {
+						englishReader = new FileReader(english);
+						japaneseReader = new FileReader(japanese);
+					} catch (FileNotFoundException e) {
+						System.out.println(e);
+					}
+					BufferedReader englishBuffered = new BufferedReader(englishReader);
+					BufferedReader japaneseBuffered = new BufferedReader(japaneseReader);
+					ArrayList<String> englishData = new ArrayList<String>();
+					ArrayList<String> japaneseData = new ArrayList<String>();
+					String Data;
+					try {
+						while((Data =englishBuffered.readLine()) != null) {
+							englishData.add(Data);
+						}
+						while((Data = japaneseBuffered.readLine()) != null) {
+							japaneseData.add(Data);
+						}
+					}catch (IOException e) {
+						System.out.println(e);
+					}
+					if(direction) {
+						int index;
+						if ((index = englishData.indexOf(language)) != -1) {
+							out = japaneseData.get(index);
+						}else {
+							out = "Oh! You made mistakes!";
+						}
+					}else {
+						int index;
+						if((index = japaneseData.indexOf(language)) != -1) {
+							out = englishData.get(index);
+						}else {
+							out = "Oh! You made mistakes!";
+						}
+					}
+				}else {
+					out = "File was not founded.";
+				}
+				break;
+			default:
+				out = "Not support.";
+		}
+		return out;
 	}
 }
