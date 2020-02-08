@@ -45,10 +45,10 @@ class Searcher{
 					break;
 				case "bot":
 				case "Bot":
-					System.out.println("Welcome to Bot World!\r\nYou can use english.");
+					System.out.println("Welcome to Bot World!\r\nYou can use english,japanese.");
 					while(out) {
 						switch (new Scanner(System.in).next()) {
-							case "english":
+							case "english":		//english -> japanese
 							case "English":
 								while(out) {
 									String japanese = new Scanner(System.in).next();
@@ -57,6 +57,19 @@ class Searcher{
 										out = false;
 									}else {
 										System.out.println(conversation(japanese,true,"english"));
+									}
+								}
+								out = true;
+								break;
+							case "japanese":		//japanese -> english
+							case "Japanese":
+								while(out) {
+									String japanese = new Scanner(System.in).next();
+									if (japanese.equals("exit")||japanese.equals("Exit")) {
+										System.out.println("Searcher//bot//japanese -> Searcher//bot");
+										out = false;
+									}else {
+										System.out.println(conversation(japanese,false,"english"));
 									}
 								}
 								out = true;
